@@ -4,19 +4,19 @@ const projects = [
         title: 'Transport Center Website + Automated Support',
         category: 'Automation & Full Stack',
         image: './photos/center-transportation-homepage.png',
-        stack: ['EJS', 'Node.js', 'IBM Macros', 'SAP Automation'],
+        stack: ['EJS', 'Node.js', 'IBM Macros', 'Enterprise Automation'],
         description: 'Full organizational site + automated support processes (password reset, user creation). Automated 35,000+ incidents.',
         role: 'Full Stack & Automation',
         impact: 'Eliminated 24/7 support center',
         details: {
             overview: 'A comprehensive digital ecosystem for the Transport Center, serving as the central hub for operations, information, and support. The system revolutionized how the unit handles IT support by automating the vast majority of routine requests.',
             features: [
-                'Automated Password Resets: Users can reset SAP and network passwords without human intervention.',
+                'Automated Password Resets: Users can reset network passwords without human intervention.',
                 'User Creation Automation: Scripts that automatically generate user accounts across multiple systems.',
                 'Central Information Hub: A unified portal for all unit news, updates, and resources.',
                 'Incident Tracking: Real-time monitoring of support request status.'
             ],
-            technical: 'Built with Node.js and EJS for the web interface, integrated with Python and IBM Macros for low-level legacy system automation (SAP).',
+            technical: 'Built with Node.js and EJS for the web interface, integrated with Python and IBM Macros for low-level legacy system automation.',
             images: ['./photos/center-transportation-homepage.png']
         }
     },
@@ -25,7 +25,7 @@ const projects = [
         title: 'Commander Dashboard',
         category: 'Business Intelligence',
         image: './photos/commander-dashboard.jpg',
-        stack: ['React', 'PowerShell', 'SAP Integrations'],
+        stack: ['React', 'PowerShell', 'Enterprise Integrations'],
         description: 'Central dashboard for manpower, missions, maintenance, presence. Enabled fast data-driven command decisions.',
         role: 'Data Pipelines & Dashboard',
         impact: 'Data-driven command decisions',
@@ -35,9 +35,9 @@ const projects = [
                 'Real-time Metrics: Live data on personnel and equipment.',
                 'Drill-down Capability: Click to see detailed reports.',
                 'Alerts: Automatic highlighting of critical issues.',
-                'SAP Integration: Pulls data directly from enterprise ERP systems.'
+                'Enterprise Integration: Pulls data directly from enterprise ERP systems.'
             ],
-            technical: 'React dashboard consuming data processed by PowerShell scripts from legacy SAP exports.',
+            technical: 'React dashboard consuming data processed by PowerShell scripts from legacy enterprise system exports.',
             images: ['./photos/commander-dashboard.jpg', './photos/commanger-dashboard2.jpg']
         }
     },
@@ -80,7 +80,8 @@ const projects = [
                 'Archive: Searchable database of all signed contracts.'
             ],
             technical: 'React frontend, Node.js backend with PDFKit for document generation.',
-            images: ['./photos/kablanim.jpg']
+            images: [],
+            note: 'Photos unavailable due to secrecy of the project'
         }
     },
     {
@@ -160,8 +161,7 @@ const projects = [
             features: [
                 'Digital Logbooks: Replaced paper logs with digital entry.',
                 'Progress Tracking: Visual graphs of student improvement.',
-                'Regulatory Compliance: Ensures all training hours meet strict military standards.',
-                'Offline Mode: Works in the field without constant internet connection.'
+                'Regulatory Compliance: Ensures all training hours meet strict military standards.'
             ],
             technical: 'React application optimized for touch interfaces on tablets.',
             images: ['./photos/truck-leasrning.png', './photos/trucklearning2.png']
@@ -246,7 +246,120 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProjects();
     setupModals();
     setupAnimations();
+    playWelcomeAnimation();
 });
+
+function playWelcomeAnimation() {
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const welcomeText = document.getElementById('welcome-text');
+    const heroSection = document.querySelector('.hero-section');
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const scrollBtn = document.querySelector('.scroll-btn');
+
+    // Hide hero elements initially
+    heroSection.style.opacity = '0';
+    heroTitle.style.opacity = '0';
+    heroSubtitle.style.opacity = '0';
+    scrollBtn.style.opacity = '0';
+
+    // Stage 1: Show "Welcome" (already visible via CSS animation)
+    // Stage 2: After 1.5s, transition to "Projects by Ariel Argevany"
+    setTimeout(() => {
+        welcomeText.style.opacity = '0';
+
+        setTimeout(() => {
+            welcomeText.innerHTML = 'Projects by <span class="gradient-text">Ariel Argevany</span>';
+            welcomeText.style.opacity = '1';
+        }, 400);
+    }, 1500);
+
+    // Stage 3: Create a clone and animate it to hero position
+    setTimeout(() => {
+        // Make hero section visible but keep title hidden
+        heroSection.style.opacity = '1';
+        heroSection.style.transition = 'opacity 2s ease-out';
+
+        // Create an absolutely positioned clone that will move
+        const clone = welcomeText.cloneNode(true);
+        clone.id = 'welcome-text-clone';
+        document.body.appendChild(clone);
+
+        // Get positions
+        const welcomeRect = welcomeText.getBoundingClientRect();
+        const heroRect = heroTitle.getBoundingClientRect();
+
+        // Position clone exactly where welcome text is
+        clone.style.position = 'fixed';
+        clone.style.top = welcomeRect.top + 'px';
+        clone.style.left = welcomeRect.left + 'px';
+        clone.style.width = welcomeRect.width + 'px';
+        clone.style.margin = '0';
+        clone.style.zIndex = '10000';
+        clone.style.pointerEvents = 'none';
+
+        // Copy initial styles
+        const welcomeStyles = window.getComputedStyle(welcomeText);
+        clone.style.fontSize = welcomeStyles.fontSize;
+        clone.style.fontWeight = welcomeStyles.fontWeight;
+        clone.style.letterSpacing = welcomeStyles.letterSpacing;
+        clone.style.color = welcomeStyles.color;
+        clone.style.fontFamily = welcomeStyles.fontFamily;
+
+        // Hide original welcome text
+        welcomeText.style.opacity = '0';
+
+        // Start background fade
+        welcomeScreen.style.transition = 'background-color 2s ease-out';
+        welcomeScreen.style.backgroundColor = 'transparent';
+
+        // Animate clone to hero position
+        requestAnimationFrame(() => {
+            clone.style.transition = 'all 2s cubic-bezier(0.33, 1, 0.68, 1)';
+
+            requestAnimationFrame(() => {
+                // Get hero styles
+                const heroStyles = window.getComputedStyle(heroTitle);
+
+                // Move to hero position
+                clone.style.top = heroRect.top + 'px';
+                clone.style.left = heroRect.left + 'px';
+                clone.style.width = heroRect.width + 'px';
+
+                // Match hero text styles
+                clone.style.fontSize = heroStyles.fontSize;
+                clone.style.fontWeight = heroStyles.fontWeight;
+                clone.style.letterSpacing = heroStyles.letterSpacing;
+                clone.style.lineHeight = heroStyles.lineHeight;
+                clone.style.textAlign = heroStyles.textAlign;
+            });
+        });
+
+        // After animation, crossfade to real hero title
+        setTimeout(() => {
+            clone.style.transition = 'opacity 0.3s ease-out';
+            clone.style.opacity = '0';
+
+            heroTitle.style.transition = 'opacity 0.3s ease-in';
+            heroTitle.style.opacity = '1';
+
+            // Fade in other hero elements
+            setTimeout(() => {
+                heroSubtitle.style.transition = 'opacity 0.8s ease-out';
+                heroSubtitle.style.opacity = '1';
+                scrollBtn.style.transition = 'opacity 0.8s ease-out';
+                scrollBtn.style.opacity = '0.8';
+            }, 300);
+
+            // Clean up
+            setTimeout(() => {
+                welcomeScreen.remove();
+                clone.remove();
+            }, 800);
+        }, 2000);
+
+    }, 3500); // Total: 1.5s (welcome) + 2s (projects by)
+}
 
 function renderProjects() {
     const grid = document.getElementById('projects');
@@ -255,7 +368,7 @@ function renderProjects() {
     // Helper to render a project card
     const createCard = (project, index) => `
         <article class="project-card" data-id="${project.id}" style="animation-delay: ${index * 100}ms">
-            <div class="card-image-wrapper">
+            <div class="card-image-wrapper" onclick="openProjectModal('${project.id}')" style="cursor: pointer;">
                 <img src="${project.image}" alt="${project.title}" class="project-image">
                 <div class="card-overlay"></div>
             </div>
@@ -467,10 +580,15 @@ window.openProjectModal = function (id) {
             <div class="modal-section-title">Technical Details</div>
             <p class="modal-text">${project.details.technical}</p>
 
-            <div class="modal-section-title">Gallery</div>
-            <div class="modal-gallery">
-                ${project.details.images.map(img => `<img src="${img}" alt="Project Screenshot" onclick="openFullscreenViewer('${project.id}')">`).join('')}
-            </div>
+            ${project.details.images && project.details.images.length > 0 ? `
+                <div class="modal-section-title">Gallery</div>
+                <div class="modal-gallery">
+                    ${project.details.images.map(img => `<img src="${img}" alt="Project Screenshot" onclick="openFullscreenViewer('${project.id}')">`).join('')}
+                </div>
+            ` : project.details.note ? `
+                <div class="modal-section-title">Gallery</div>
+                <p class="modal-text" style="font-style: italic; color: var(--text-muted);">${project.details.note}</p>
+            ` : ''}
         </div>
     `;
 
@@ -508,8 +626,8 @@ window.openFullscreenViewer = function (projectId) {
         </div>
     `;
 
-    // Add animation for PC apps
-    if (isPcApp) {
+    // Add animation for PC apps (only on mobile devices)
+    if (isPcApp && window.innerWidth <= 768) {
         contentHtml += `
             <div class="turn-phone-animation">
                 <div class="phone-icon"></div>
@@ -537,8 +655,8 @@ window.openFullscreenViewer = function (projectId) {
     // Show viewer
     viewer.classList.add('active');
 
-    // Handle PC App Logic
-    if (isPcApp) {
+    // Handle PC App Logic (only on mobile)
+    if (isPcApp && window.innerWidth <= 768) {
         const content = viewer.querySelector('.fullscreen-content');
         const animation = viewer.querySelector('.turn-phone-animation');
 
@@ -583,7 +701,7 @@ function renderResume() {
                             <div class="resume-item-date">${exp.date}</div>
                         </div>
                         <div class="resume-item-subtitle">${exp.role}</div>
-                        <p class="modal-text" style="margin-bottom: 0.5rem">${exp.description}</p>
+                        <p class="resume-item-description">${exp.description}</p>
                         <ul class="resume-list">
                             ${exp.points.map(p => `<li>${p}</li>`).join('')}
                         </ul>
