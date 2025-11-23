@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ariel Argevany | Projects</title>
+    <meta name="description"
+        content="Premium Portfolio of Ariel Argevany - AI Automation, Full-Stack Engineering, UX/UI Systems.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="ambient-background">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Projects by <span class="gradient-text clickable-name" id="resume-trigger">Ariel
+                    Argevany</span></h1>
+            <p class="hero-subtitle">AI Automation • Full-Stack Engineering • UX/UI Systems</p>
+            <a href="#projects" class="scroll-btn">
+                View All Projects
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 13L12 18L17 13M7 6L12 11L17 6" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- MakeitX Section -->
+    <section class="makeitx-section">
+        <div class="makeitx-container">
+            <div class="makeitx-logo-area">
+                <h2 class="makeitx-title">MakeitX</h2>
+                <span class="makeitx-badge">Co-Founder & Tech Lead</span>
+            </div>
+            <p class="makeitx-description">
+                A boutique tech studio specializing in custom applications, modern websites, and advanced AI-driven
+                automation solutions for businesses. We design and build end-to-end digital systems that enhance
+                customer engagement and create scalable, high-impact workflows.
+            </p>
+            <div class="makeitx-services">
+                <div class="service-tag">AI Automation</div>
+                <div class="service-tag">Custom Web Apps</div>
+                <div class="service-tag">Chatbots & LLMs</div>
+                <div class="service-tag">Business Logic Optimization</div>
+            </div>
+        </div>
+    </section>
+
+    <main id="projects" class="projects-grid">
+        <!-- Projects will be injected here by JavaScript -->
+    </main>
+
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="modal-overlay">
+        <div class="modal-content resume-content">
+            <button class="modal-close">&times;</button>
+            <div class="resume-body">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>Ariel Argevany — AI Automation & Full-Stack Development</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
